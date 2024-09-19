@@ -1,0 +1,596 @@
+Glosario Básico de HTML
+<!DOCTYPE html>
+Indica que o documento é un arquivo HTML5.
+
+<html>
+Etiqueta raíz que contén todo o código HTML.
+
+<head>
+Contén información sobre o documento, como o título e enlaces a estilos ou scripts.
+
+<title>
+Define o título que se mostra na pestana do navegador.
+
+<body>
+Contén o contido visible da páxina.
+
+<h1>, <h2>, ... <h6>
+Etiquetas de encabezado para títulos de diferentes niveis. Utiliza <h1> para o título principal e <h2> para subtítulos.
+
+<p>
+Define un parágrafo de texto.
+
+<div>
+Un contenedor xeral que pode agrupar outros elementos.
+
+<span>
+Utilízase para aplicar estilos a un segmento de texto dentro doutro elemento.
+
+<img>
+Para inserir imaxes. Usa src para a URL da imaxe e alt para a descrición alternativa.
+
+html
+Copiar código
+<img src="ruta/da/imaxe.jpg" alt="Descrición da imaxe">
+<button>
+Para crear un botón que os usuarios poden premer.
+
+<a>
+Crea un hipervínculo. Usa href para especificar a URL.
+
+html
+Copiar código
+<a href="https://www.example.com">Ir a Example</a>
+<ul>, <ol>, <li>
+Para crear listas non ordenadas (<ul>) ou ordenadas (<ol>). Cada elemento da lista vai dentro de <li>.
+
+<script>
+Permite inserir scripts de JavaScript. Pódese colocar no <head> ou no final do <body>.
+
+<style>
+Para definir estilos CSS directamente no HTML. Normalmente se coloca dentro do <head>.
+
+Funcións de JavaScript
+Para un xogo de memoria, tamén necesitarás algo de JavaScript. Aquí algúns conceptos básicos:
+
+document.getElementById('id')
+Selecciona un elemento do DOM co id especificado.
+
+addEventListener('event', function)
+Engade un escoitador de eventos para que algo aconteza cando un evento específico ocorre (como premer un botón).
+
+Math.random()
+Xera un número aleatorio, útil para mezclar cartas no xogo.
+
+setTimeout(function, milliseconds)
+Executa unha función despois dun tempo especificado.
+
+Estrutura Básica
+Aquí tes un exemplo básico da estrutura HTML para o teu xogo de memoria:
+
+html
+Copiar códigoEtiquetas HTML
+<!DOCTYPE html>
+Esta declaración é obrigatoria para indicar ao navegador que o documento é HTML5. Sen esta etiqueta, o navegador pode non renderizar correctamente a páxina.
+
+<html lang="gl">
+Atribúeselle un atributo lang que indica que a lingua da páxina é o galego, o que pode ser útil para a accesibilidade e SEO.
+
+<head>
+Aquí tamén podes incluir metadatos adicionais como:
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+Para asegurar que a páxina se adapte a diferentes tamaños de pantalla, especialmente en dispositivos móbiles.
+<link>
+Para enlazar estilos CSS externos:
+
+html
+Copiar código
+<link rel="stylesheet" href="estilos.css">
+<style>
+Para aplicar estilos directamente no HTML, o que pode ser útil para pequenos proxectos ou prototipos.
+
+Contido Dinámico con JavaScript
+document.getElementById('id')
+Permite acceder a elementos específicos. Por exemplo:
+
+javascript
+Copiar código
+const boton = document.getElementById('comezar');
+addEventListener
+É unha forma de engadir interacción á túa páxina. Por exemplo:
+
+javascript
+Copiar código
+boton.addEventListener('click', function() {
+    // Iniciar o xogo
+});
+Math.random()
+Se queres mezclar as cartas, podes usar:
+
+javascript
+Copiar código
+let numeroAleatorio = Math.random();
+setTimeout
+Para dar un tempo límite antes de mostrar unha mensaxe ou para ocultar elementos:
+
+javascript
+Copiar código
+setTimeout(function() {
+    // Ocultar ou mostrar elementos
+}, 2000); // 2 segundos
+Arrays
+Os arrays son moi útiles para almacenar as cartas do xogo:
+
+javascript
+Copiar código
+const cartas = ['A', 'B', 'C', 'A', 'B', 'C']; // Exemplos de cartas
+Ideas para o Xogo de Memoria
+Diseño do Taboleiro
+Podes usar un div para cada carta no taboleiro. As cartas deberían ser visibles e ocultas inicialmente:
+
+html
+Copiar código
+<div class="carta" id="carta1"></div>
+Estilos CSS
+Para o estilo das cartas, usa CSS para darlles tamaño, cor e efecto ao pasar o rato:
+
+css
+Copiar código
+.carta {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.carta.revelada {
+    background-color: #fff; /* Cor diferente ao revelarse */
+}
+Lóxica do Xogo
+A lóxica do xogo pode incluir:
+
+Revelar cartas ao premer.
+Comparar cartas: se as dúas cartas son iguais, manténlas visibles; se non, ocúltas de novo.
+Contar os intentos e mostrar un mensaje de vitoria ao completar o xogo.
+Exemplo de Lóxica Básica en JavaScript
+Aquí tes un exemplo básico de como pode lucir a lóxica do xogo:
+
+javascript
+Copiar código
+let cartasReveladas = [];
+let intentos = 0;
+
+function iniciarXogo() {
+    // Barallar as cartas
+    cartas.sort(() => Math.random() - 0.5);
+    // Crear as cartas no DOM
+    const taboleiro = document.getElementById('taboleiro');
+    taboleiro.innerHTML = ''; // Limpa o taboleiro
+    cartas.forEach((carta, index) => {
+        const div = document.createElement('div');
+        div.className = 'carta';
+        div.setAttribute('data-value', carta);
+        div.addEventListener('click', revelarCarta);
+        taboleiro.appendChild(div);
+    });
+}
+
+function revelarCarta() {
+    if (cartasReveladas.length < 2) {
+        this.classList.add('revelada');
+        cartasReveladas.push(this);
+
+        if (cartasReveladas.length === 2) {
+            setTimeout(compararCartas, 1000);
+        }
+    }
+}
+
+function compararCartas() {
+    intentos++;
+    const [carta1, carta2] = cartasReveladas;
+
+    if (carta1.getAttribute('data-value') !== carta2.getAttribute('data-value')) {
+        carta1.classList.remove('revelada');
+        carta2.classList.remove('revelada');
+    }
+    cartasReveladas = [];
+}
+
+// Inicializa o xogo ao cargar a páxina
+window.onload = iniciarXogo;
+Recursos Adicionais
+MDN Web Docs: Mozilla Developer Network é un recurso excelente para aprender sobre HTML, CSS e JavaScript.
+W3Schools: W3Schools ten exemplos e tutoriales sobre HTML e JavaScript.
+CodePen: Un lugar para experimentar co código e ver os resultados en tempo real.
+Se necesitas máis información sobre un tema específico ou exemplos adicionais, non dudes en preguntar!
+
+
+
+
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <title>Xogo de Memoria</title>
+    <style>
+        /* Estilos para o xogo */
+    </style>
+</head>
+<body>
+    <h1>Xogo de Memoria</h1>
+    <div id="taboleiro">
+        <!-- As cartas irán aquí -->
+    </div>
+    <button id="comezar">Comezar o xogo</button>
+
+    <script>
+        // Lóxica do xogo irá aquí
+    </script>
+</body>
+</html>
+Consellos
+Asegúrate de probar o teu código no navegador.
+Comenza cun pequeno proxecto e engade características gradualmente.
+Usa ferramentas como Chrome DevTools para depurar.
+Espero que este glosario che axude a dar os primeiros pasos na creación do teu xogo de memoria! Se necesitas máis detalles, non dubides en preguntar.
+
+
+
+nserir imaxes. Usa src para a URL da imaxe e alt para a descrición alternativa.
+
+html
+Copiar código
+<img src="ruta/da/imaxe.jpg" alt="Descrición da imaxe">
+<button>
+Para crear un botón que os usuarios poden premer.
+
+<a>
+Crea un hipervínculo. Usa href para especificar a URL.
+
+html
+Copiar código
+<a href="https://www.example.com">Ir a Example</a>
+<ul>, <ol>, <li>
+Para crear listas non ordenadas (<ul>) ou ordenadas (<ol>). Cada elemento da lista vai dentro de <li>.
+
+<script>
+Permite inserir scripts de JavaScript. Pódese colocar no <head> ou no final do <body>.
+
+<style>
+Para definir estilos CSS directamente no HTML. Normalmente se coloca dentro do <head>.
+
+Funcións de JavaScript
+Para un xogo de memoria, tamén necesitarás algo de JavaScript. Aquí algúns conceptos básicos:
+
+document.getElementById('id')
+Selecciona un elemento do DOM co id especificado.
+
+addEventListener('event', function)
+Engade un escoitador de eventos para que algo aconteza cando un evento específico ocorre (como premer un botón).
+
+Math.random()
+Xera un número aleatorio, útil para mezclar cartas no xogo.
+
+setTimeout(function, milliseconds)
+Executa unha función despois dun tempo especificado.
+
+Estrutura Básica
+Aquí tes un exemplo básico da estrutura HTML para o teu xogo de memoria:
+
+html
+Copiar códigoEtiquetas HTML
+<!DOCTYPE html>
+Esta declaración é obrigatoria para indicar ao navegador que o documento é HTML5. Sen esta etiqueta, o navegador pode non renderizar correctamente a páxina.
+
+<html lang="gl">
+Atribúeselle un atributo lang que indica que a lingua da páxina é o galego, o que pode ser útil para a accesibilidade e SEO.
+
+<head>
+Aquí tamén podes incluir metadatos adicionais como:
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+Para asegurar que a páxina se adapte a diferentes tamaños de pantalla, especialmente en dispositivos móbiles.
+<link>
+Para enlazar estilos CSS externos:
+
+html
+Copiar código
+<link rel="stylesheet" href="estilos.css">
+<style>
+Para aplicar estilos directamente no HTML, o que pode ser útil para pequenos proxectos ou prototipos.
+
+Contido Dinámico con JavaScript
+document.getElementById('id')
+Permite acceder a elementos específicos. Por exemplo:
+
+javascript
+Copiar código
+const boton = document.getElementById('comezar');
+addEventListener
+É unha forma de engadir interacción á túa páxina. Por exemplo:
+
+javascript
+Copiar código
+boton.addEventListener('click', function() {
+    // Iniciar o xogo
+});
+Math.random()
+Se queres mezclar as cartas, podes usar:
+
+javascript
+Copiar código
+let numeroAleatorio = Math.random();
+setTimeout
+Para dar un tempo límite antes de mostrar unha mensaxe ou para ocultar elementos:
+
+javascript
+Copiar código
+setTimeout(function() {
+    // Ocultar ou mostrar elementos
+}, 2000); // 2 segundos
+Arrays
+Os arrays son moi útiles para almacenar as cartas do xogo:
+
+javascript
+Copiar código
+const cartas = ['A', 'B', 'C', 'A', 'B', 'C']; // Exemplos de cartas
+Ideas para o Xogo de Memoria
+Diseño do Taboleiro
+Podes usar un div para cada carta no taboleiro. As cartas deberían ser visibles e ocultas inicialmente:
+
+html
+Copiar código
+<div class="carta" id="carta1"></div>
+Estilos CSS
+Para o estilo das cartas, usa CSS para darlles tamaño, cor e efecto ao pasar o rato:
+
+css
+Copiar código
+.carta {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.carta.revelada {
+    background-color: #fff; /* Cor diferente ao revelarse */
+}
+Lóxica do Xogo
+A lóxica do xogo pode incluir:
+
+Revelar cartas ao premer.
+Comparar cartas: se as dúas cartas son iguais, manténlas visibles; se non, ocúltas de novo.
+Contar os intentos e mostrar un mensaje de vitoria ao completar o xogo.
+Exemplo de Lóxica Básica en JavaScript
+Aquí tes un exemplo básico de como pode lucir a lóxica do xogo:
+
+javascript
+Copiar código
+let cartasReveladas = [];
+let intentos = 0;
+
+function iniciarXogo() {
+    // Barallar as cartas
+    cartas.sort(() => Math.random() - 0.5);
+    // Crear as cartas no DOM
+    const taboleiro = document.getElementById('taboleiro');
+    taboleiro.innerHTML = ''; // Limpa o taboleiro
+    cartas.forEach((carta, index) => {
+        const div = document.createElement('div');
+        div.className = 'carta';
+        div.setAttribute('data-value', carta);
+        div.addEventListener('click', revelarCarta);
+        taboleiro.appendChild(div);
+    });
+}
+
+function revelarCarta() {
+    if (cartasReveladas.length < 2) {
+        this.classList.add('revelada');
+        cartasReveladas.push(this);
+
+        if (cartasReveladas.length === 2) {
+            setTimeout(compararCartas, 1000);
+        }
+    }
+}
+
+function compararCartas() {
+    intentos++;
+    const [carta1, carta2] = cartasReveladas;
+
+    if (carta1.getAttribute('data-value') !== carta2.getAttribute('data-value')) {
+        carta1.classList.remove('revelada');
+        carta2.classList.remove('revelada');
+    }
+    cartasReveladas = [];
+}
+
+// Inicializa o xogo ao cargar a páxina
+window.onload = iniciarXogo;
+Recursos Adicionais
+MDN Web Docs: Mozilla Developer Network é un recurso excelente para aprender sobre HTML, CSS e JavaScript.
+W3Schools: W3Schools ten exemplos e tutoriales sobre HTML e JavaScript.
+CodePen: Un lugar para experimentar co código e ver os resultados en tempo real.
+Se necesitas máis información sobre un tema específico ou exemplos adicionais, non dudes en preguntar!
+
+
+
+
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <title>Xogo de Memoria</title>
+    <style>
+        /* Estilos para o xogo */
+    </style>
+</head>
+<body>
+    <h1>Xogo de Memoria</h1>
+    <div id="taboleiro">
+        <!-- As cartas irán aquí -->
+    </div>
+    <button id="comezar">Comezar o xogo</button>
+
+    <script>
+        // Lóxica do xogo irá aquí
+    </script>
+</body>
+</html>
+Consellos
+Asegúrate de probar o teu código no navegador.
+Comenza cun pequeno proxecto e engade características gradualmente.
+Usa ferramentas como Chrome DevTools para depurar.
+Espero que este glosario che axude a dar os primeiros pasos na creación do teu xogo de memoria! Se necesitas máis detalles, non dubides en preguntar.
+
+
+
+Aquí tes un exemplo simple para crear un xogo de memoria en HTML usando imaxes e en galego. O código está ben comentado para que poidas entendelo facilmente. Imos usalo paso a paso.
+
+Código HTML para o Xogo de Memoria
+html
+Copiar código
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xogo de Memoria</title>
+    <style>
+        /* Estilos para o taboleiro e as cartas */
+        #taboleiro {
+            display: flex;
+            flex-wrap: wrap;
+            width: 220px; /* Ancho total do taboleiro */
+            margin: auto; /* Centra o taboleiro na páxina */
+        }
+
+        .carta {
+            width: 100px; /* Ancho de cada carta */
+            height: 100px; /* Altura de cada carta */
+            background-color: #f0f0f0; /* Cor de fondo das cartas */
+            border: 1px solid #ccc; /* Bordo das cartas */
+            margin: 5px; /* Espazo entre cartas */
+            cursor: pointer; /* Cambia o cursor ao pasar o rato */
+        }
+
+        .revelada {
+            opacity: 1; /* Carta visible */
+        }
+
+        .carta img {
+            width: 100%; /* A imaxe ocupa toda a carta */
+            height: 100%; /* A imaxe ocupa toda a carta */
+            display: none; /* Inicialmente oculta */
+        }
+    </style>
+</head>
+<body>
+    <h1>Xogo de Memoria</h1>
+    <div id="taboleiro">
+        <!-- As cartas irán aquí -->
+    </div>
+    <button id="comezar">Comezar o xogo</button>
+
+    <script>
+        // Array con as imaxes das cartas
+        const cartas = [
+            'imaxe1.jpg', 'imaxe1.jpg',
+            'imaxe2.jpg', 'imaxe2.jpg',
+            'imaxe3.jpg', 'imaxe3.jpg',
+            'imaxe4.jpg', 'imaxe4.jpg'
+        ];
+
+        let cartasReveladas = []; // Array para almacenar as cartas reveladas
+        let intentos = 0; // Contador de intentos
+
+        // Función para iniciar o xogo
+        function iniciarXogo() {
+            // Barallar as cartas
+            cartas.sort(() => Math.random() - 0.5);
+            const taboleiro = document.getElementById('taboleiro');
+            taboleiro.innerHTML = ''; // Limpa o taboleiro
+
+            // Crear as cartas no DOM
+            cartas.forEach((carta) => {
+                const div = document.createElement('div');
+                div.className = 'carta';
+                div.setAttribute('data-value', carta);
+
+                // Crear a imaxe dentro da carta
+                const img = document.createElement('img');
+                img.src = carta; // Ruta da imaxe
+                img.alt = "Carta"; // Descrición alternativa da imaxe
+                div.appendChild(img);
+
+                // Engadir evento de clic
+                div.addEventListener('click', revelarCarta);
+                taboleiro.appendChild(div);
+            });
+        }
+
+        // Función para revelar a carta
+        function revelarCarta() {
+            if (cartasReveladas.length < 2) {
+                this.querySelector('img').style.display = 'block'; // Mostra a imaxe
+                this.classList.add('revelada'); // Marca a carta como revelada
+                cartasReveladas.push(this); // Engade á lista de cartas reveladas
+
+                // Comproba se hai dúas cartas reveladas
+                if (cartasReveladas.length === 2) {
+                    setTimeout(compararCartas, 1000); // Compara despois de 1 segundo
+                }
+            }
+        }
+
+        // Función para comparar cartas
+        function compararCartas() {
+            intentos++; // Aumenta o contador de intentos
+            const [carta1, carta2] = cartasReveladas; // Obtén as dúas cartas
+
+            // Se as cartas non son iguais, ocúltalas
+            if (carta1.getAttribute('data-value') !== carta2.getAttribute('data-value')) {
+                carta1.querySelector('img').style.display = 'none'; // Oculta a imaxe
+                carta2.querySelector('img').style.display = 'none'; // Oculta a imaxe
+            }
+
+            cartasReveladas = []; // Reinicia o array de cartas reveladas
+        }
+
+        // Inicializa o xogo ao cargar a páxina
+        document.getElementById('comezar').addEventListener('click', iniciarXogo);
+    </script>
+</body>
+</html>
+Explicación do Código
+HTML:
+
+<!DOCTYPE html>: Indica que este é un documento HTML5.
+<html lang="gl">: Define que a lingua da páxina é o galego.
+<h1>Xogo de Memoria</h1>: Título do xogo.
+<div id="taboleiro">: Aquí se mostrarán as cartas do xogo.
+<button id="comezar">Comezar o xogo</button>: Un botón para iniciar o xogo.
+CSS:
+
+Define estilos para o taboleiro e as cartas. As cartas son inicialmente ocultas e se amosan ao ser reveladas.
+JavaScript:
+
+const cartas: Array que contén as rutas das imaxes.
+iniciarXogo(): Función para barallar as cartas e crear elementos no DOM.
+revelarCarta(): Función que se chama ao premer unha carta, mostrando a imaxe.
+compararCartas(): Compara as cartas reveladas e oculta aquelas que non son iguais.
+Recursos e Imaxes
+Asegúrate de ter as imaxes (como imaxe1.jpg, imaxe2.jpg, etc.) na mesma carpeta que o teu arquivo HTML, ou usa rutas correctas.
+
+Probar o Código
+Podes copiar este código nun arquivo HTML e abrirno cun navegador para probar o xogo. Espero que che resulte útil! Se tes preguntas, non dubides en preguntar.

@@ -1,0 +1,159 @@
+﻿Cheatsheet de PHP
+
+1. Estructura básica de un archivo PHP
+Todos los archivos PHP deben comenzar con la etiqueta <?php y pueden terminar con ?> (aunque no siempre es necesario cerrarla si solo hay PHP en el archivo).
+php
+Copiar código
+<?php
+// Código PHP aquí
+?>
+2. Declaración de variables
+En PHP, todas las variables comienzan con el símbolo $. No es necesario declarar el tipo de dato, PHP lo hace automáticamente.
+php
+Copiar código
+$nombre = "Juan";   // String
+$edad = 12;         // Integer
+$precio = 19.99;    // Float
+$esActivo = true;   // Boolean
+3. Tipos de datos principales
+• String: Texto entre comillas dobles o simples.
+php
+Copiar código
+$mensaje = "Hola, Mundo!";
+• Integer: Números enteros.
+php
+Copiar código
+$edad = 25;
+• Float: Números decimales.
+php
+Copiar código
+$precio = 99.99;
+• Boolean: Verdadero (true) o Falso (false).
+php
+Copiar código
+$esValido = true;
+4. Operadores
+• Aritméticos: +, -, *, /, %
+php
+Copiar código
+$suma = 5 + 3;  // 8
+$resta = 5 - 3; // 2
+• Comparación: ==, !=, >, <, >=, <=
+php
+Copiar código
+if ($edad >= 18) {
+    echo "Mayor de edad";
+}
+• Asignación: =, +=, -=, *=, /=
+php
+Copiar código
+$x = 10;
+$x += 5; // 15
+5. Estructuras de control
+Condicionales (if, else, elseif)
+php
+Copiar código
+if ($edad >= 18) {
+    echo "Mayor de edad";
+} else {
+    echo "Menor de edad";
+}
+Bucle for
+Repite un bloque de código un número determinado de veces.
+php
+Copiar código
+for ($i = 0; $i < 10; $i++) {
+    echo $i;
+}
+Bucle while
+Repite un bloque de código mientras una condición sea verdadera.
+php
+Copiar código
+while ($edad < 18) {
+    $edad++;
+}
+Bucle foreach
+Se utiliza para recorrer arrays.
+php
+Copiar código
+$colores = array("rojo", "azul", "verde");
+
+foreach ($colores as $color) {
+    echo $color;
+}
+6. Funciones
+Una función es un bloque de código que puedes reutilizar.
+php
+Copiar código
+function saludar($nombre) {
+    echo "Hola, " . $nombre;
+}
+
+saludar("Carlos"); // Hola, Carlos
+7. Arrays
+Un array es una colección de valores.
+Array indexado
+php
+Copiar código
+$colores = array("rojo", "azul", "verde");
+echo $colores[0];  // rojo
+Array asociativo
+Los arrays asociativos tienen claves en lugar de índices numéricos.
+php
+Copiar código
+$persona = array("nombre" => "Juan", "edad" => 25);
+echo $persona["nombre"];  // Juan
+8. Funciones comunes en PHP
+FunciónDescripciónEjemplostrlen()Devuelve la longitud de una cadenastrlen("Hola") // 4strtolower()Convierte una cadena a minúsculasstrtolower("Hola") // "hola"strtoupper()Convierte una cadena a mayúsculasstrtoupper("Hola") // "HOLA"count()Cuenta los elementos de un arraycount($colores) // 3array_push()Añade un elemento al final de un arrayarray_push($colores, "amarillo")in_array()Comprueba si un valor está en un arrayin_array("rojo", $colores) // truedate()Devuelve la fecha o la hora actualdate("Y-m-d") // 2024-09-19isset()Comprueba si una variable está definida y no es nullisset($nombre) // true9. Superglobales de PHP
+Las superglobales son arrays predefinidos en PHP que están disponibles en todos los scripts.
+• $_GET: Recoge datos enviados por la URL (método GET).
+php
+Copiar código
+echo $_GET['nombre'];
+• $_POST: Recoge datos enviados desde un formulario (método POST).
+php
+Copiar código
+echo $_POST['edad'];
+• $_SERVER: Información sobre el servidor y el entorno.
+php
+Copiar código
+echo $_SERVER['SERVER_NAME'];
+10. Trucos útiles
+1. Mezclar PHP con HTML
+PHP permite mezclar código HTML y PHP para crear páginas web dinámicas.
+php
+Copiar código
+<!DOCTYPE html>
+<html>
+<head><title>Mi página web</title></head>
+<body>
+    <h1><?php echo "Bienvenidos a mi página"; ?></h1>
+</body>
+</html>
+2. Comentarios en PHP
+Es importante agregar comentarios a tu código para hacerlo más legible. PHP tiene dos formas de agregar comentarios:
+php
+Copiar código
+// Comentario de una línea
+
+/*
+Comentario
+de varias líneas
+*/
+3. Función die()
+Detiene la ejecución del script si algo sale mal. Muy útil para depurar errores.
+php
+Copiar código
+$conexion = mysqli_connect("localhost", "usuario", "contraseña");
+
+if (!$conexion) {
+    die("Error al conectar a la base de datos");
+}
+4. var_dump() para depuración
+Muestra información detallada sobre una variable (tipo, contenido).
+php
+Copiar código
+$nombre = "Carlos";
+var_dump($nombre); // string(6) "Carlos"
+11. Glosario de términos importantes
+TérminoDescripciónApacheEl servidor web que ejecuta las páginas en tu servidor local.Base de datosSistema que almacena datos de manera organizada. En PHP, normalmente se usa MySQL.BucleRepetición de un bloque de código varias veces. Ej: for, while.EchoFunción que imprime texto o contenido en la página web.HTMLLenguaje de marcado que estructura el contenido de una página web.MySQLSistema de gestión de bases de datos relacional, usado para almacenar información.POST y GETMétodos para enviar datos de un formulario o una URL respectivamente.Servidor localUn servidor que corre en tu propio ordenador usando herramientas como XAMPP.
