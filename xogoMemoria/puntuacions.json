@@ -1,8 +1,30 @@
 [
-    [
-        {
-          "usuario": "pepe",
-          "puntuacions": [{"partida1":13}, {"partida2":7},{"partida3":0},{"partida4":55},{"partida5":9}]
-        }
-      ]
+  {
+    "usuario": "a",
+    "puntos": 1
+  },
+  {
+    "usuario": "a",
+    "puntos": 1
+  },
+  {
+    "usuario": "a",
+    "puntos": 1
+  },
+  {
+    "usuario": "pepe",
+    "puntos": 15555555555555555
+  },
+  {
+    "usuario": "a",
+    "puntos": 12
+  },
+  {
+    "usuario": "a",
+    "puntos": 12
+  },
+  {
+    "usuario": "a",
+    "puntos": 31
+  }
 ]
