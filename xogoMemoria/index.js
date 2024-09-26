@@ -66,40 +66,77 @@ function rexistrarUsuario() {
 //***********MENÚ PRINCIPAL */
 
 function menuPrincipal() {
-    console.log("Menú principal:");
-    console.log("1 Nova partida");
-    console.log("2 Amosar o historial");
-    console.log("3 Saír");
-    rl.question("Elixe unha opción: ", function (opcion) {
-      switch (opcion) {
-        case "1":
-          xogarPartida();
-          break;
-        case "2":
-          amosarHistorial();
-          break;
-        case "3":
-          rl.close();
-          break;
-      }
-    });
-  }
+  console.log("Menú principal:");
+  console.log("1 Competir");
+  // console.log("2 Modo competitivo");
+  // console.log("3 Amosar o historial");
+  console.log("2 Saír");
+  rl.question("Elixe unha opción: ", function (opcion) {
+    switch (opcion) {
+      case "1":
+        xogarPartida();
+        break;
+      case "2":
+        modoCompetitivo();
+        break;
+      case "3":
+        amosarHistorial();
+        break;
+      case "4":
+        rl.close();
+        break;
+    }
+  });
+}
 
+let competitivo = false;
 
+//***********MODO COMPETITIVO  */
 
+function menuPrincipal() {
+  console.log("Modo competitivo:");
+  console.log("1 Nova partida");
+  console.log("2 Modo competitivo");
+  console.log("3 Amosar o historial");
+  console.log("4 Saír");
+  rl.question("Elixe unha opción: ", function (opcion) {
+    switch (opcion) {
+      case "1":
+        xogarPartida();
+        break;
+      case "2":
+        modoCompetitivo();
+        break;
+      case "3":
+        amosarHistorial();
+        break;
+      case "4":
+        rl.close();
+        break;
+    }
+  });
+}
+
+//--------ENSINA CARTAS
+function modoCompetitivo() {
+  competitivo = true;
+  console.log("****COMPETITIVO*********");
+  rl.close()
+}
 
 
 
 //************FUNCIÓNS PARTIDA  */
 
 function xogarPartida(puntuacion = 0) {
-  const cartas = [1, 1, 2, 2, 3, 3];  
-  
+  // const cartas = [1, 1, 2, 2, 3, 3];  
+  const cartas = ['♥', '♥', '♤', '♤', '♧', '♧'];
+
   let estadoCartas = new Array(6).fill(false);  // Estado das cartas (seleccionadas ou non)
   let paresEncontrados = 0;
 
 
-//--------ENSINA CARTAS
+  //--------ENSINA CARTAS
   function mostrarCartas() {
     console.log("*************");
     for (let i = 0; i < 6; i++) {
@@ -108,7 +145,8 @@ function xogarPartida(puntuacion = 0) {
     }
     console.log("*************");
   }
-//--------------MARCA CARTA
+
+  //--------------MARCA CARTA
   function seleccionarCarta(callback) {
     rl.question("Selecciona unha carta (1-6): ", function (carta) {
       carta = parseInt(carta);
@@ -120,17 +158,17 @@ function xogarPartida(puntuacion = 0) {
       callback(carta);
     });
   }
-//---- COMPROBA COINCIDENCIA
+  //---- COMPROBA COINCIDENCIA
   function comprobarMatch(carta1, carta2) {
     if (cartas[carta1 - 1] === cartas[carta2 - 1]) {
-      console.log("Match!");
+      console.log("Coinciden!");
       paresEncontrados++;
       puntuacion += 1;
     } else {
-      console.log("Non houbo match.");
-      puntuacion -= 0.5;
+      console.log("Non coinciden.");
+      puntuacion -= 0.1;
       estadoCartas[carta1 - 1] = false;  // Desmarcar
-      estadoCartas[carta2 - 1] = false;  
+      estadoCartas[carta2 - 1] = false;
     }
     //volver de novo a mostrar o cadro de cartas (coas parellas xa feitas)
     mostrarCartas();
@@ -167,7 +205,7 @@ function xogarPartida(puntuacion = 0) {
 function amosarHistorial() {
   console.log(`Historial de partidas de ${usuario.nome}:`);
   const historialUsuario = puntuacions.filter((p) => p.usuario === usuario.nome);
-  
+
   if (historialUsuario.length === 0) {
     console.log("Non hai partidas rexistradas pra este usuario.");
   } else {
@@ -175,9 +213,28 @@ function amosarHistorial() {
       console.log(`Partida ${index + 1}: ${partida.puntos} puntos`);
     });
   }
-  
+
   menuPrincipal();  // Volver ao menú principal despois de mostrar
 }
 
+
+
+
+
+
+// -----------LÓXICA DA MÁQUINA
+
+//--------------MARCA CARTA
+function seleccionarCartaMáquina() {
+  // rl.question("Selecciona unha carta (1-6): ", function (carta) {
+  //   carta = parseInt(carta);
+  //   if (carta < 1 || carta > 6 || estadoCartas[carta - 1]) {
+  //     console.log("Carta inválida ou xa seleccionada.");
+  //     return seleccionarCarta(callback);  // Volver escoller
+  //   }
+  //   estadoCartas[carta - 1] = true;  // Marcar carta seleccionada
+  //   callback(carta);
+  // });
+}
 
 menuLogin();
