@@ -37,6 +37,30 @@
   },
   {
     "usuario": "a",
+<<<<<<< HEAD
     "puntos": 2.7
+=======
+    "puntos": 3
+  },
+  {
+    "usuario": "a",
+    "puntos": 2.4
+  },
+  {
+    "usuario": "a",
+    "puntos": 2.9
+  },
+  {
+    "usuario": "a",
+    "puntos": 3
+  },
+  {
+    "usuario": "a",
+    "puntos": 2.8
+  },
+  {
+    "usuario": "a",
+    "puntos": 2.8
+>>>>>>> 2a77fbf5bd04bbb21363c6ffd82af130d06617e4
   }
 ]
