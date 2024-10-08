@@ -1,0 +1,87 @@
+Glosario de Etiquetas HTML
+1. Etiquetas de Estructura Básica
+Etiqueta	Descrición
+<!DOCTYPE html>	Declara o tipo de documento e indica que é HTML5.
+<html>	Elemento raíz que contén todo o documento HTML.
+<head>	Contén metadatos sobre o documento (título, estilos, etc.).
+<title>	Define o título do documento que aparece na pestana do navegador.
+<body>	Contén o contido visible do documento HTML.
+2. Etiquetas de Texto
+Etiqueta	Descrición
+<h1> - <h6>	Encabezados de diferentes tamaños (h1 é o maior, h6 é o menor).
+<p>	Define un parágrafo de texto.
+<br>	Insire un salto de liña.
+<hr>	Insire unha liña horizontal (separador).
+<strong>	Indica texto importante (xeralmente en negrita).
+<em>	Indica texto enfatizado (xeralmente en cursiva).
+<mark>	Resalta texto.
+<small>	Define texto de menor tamaño.
+<blockquote>	Define unha cita de texto.
+<cite>	Indica a fonte dunha cita.
+<code>	Define un fragmento de código.
+<pre>	Mantén o formato do texto predefinido (preserva espazos e liñas).
+3. Etiquetas de Enlazado
+Etiqueta	Descrición
+<a>	Crea un hiperenlace a outra páxina ou recurso.
+<link>	Define unha relación entre o documento e un recurso externo (xeralmente usado para estilos CSS).
+4. Etiquetas de Imágenes e Multimedia
+Etiqueta	Descrición
+<img>	Insire unha imaxe no documento.
+<audio>	Insire contido de audio.
+<video>	Insire contido de vídeo.
+<source>	Define múltiples fontes para os elementos de audio e vídeo.
+<track>	Proporciona subtítulos para elementos de vídeo.
+5. Etiquetas de Listas
+Etiqueta	Descrición
+<ul>	Define unha lista desordenada (con balas).
+<ol>	Define unha lista ordenada (numerada).
+<li>	Define un elemento de lista.
+<dl>	Define unha lista de definicións.
+<dt>	Define un termo na lista de definicións.
+<dd>	Define a descrición dun termo na lista de definicións.
+6. Etiquetas de Tabelas
+Etiqueta	Descrición
+<table>	Define unha táboa.
+<tr>	Define unha fila na táboa.
+<th>	Define un encabezado de táboa.
+<td>	Define unha celda de datos na táboa.
+<caption>	Proporciona un título á táboa.
+7. Etiquetas de Formularios
+Etiqueta	Descrición
+<form>	Define un formulario para enviar datos.
+<input>	Define un campo de entrada para formularios.
+<textarea>	Define un campo de texto multilínea.
+<button>	Define un botón que pode ser premido.
+<select>	Define un menú despregable.
+<option>	Define unha opción dentro de <select>.
+<label>	Define unha etiqueta para un elemento de formulario.
+<fieldset>	Agrupa elementos relacionados dentro dun formulario.
+<legend>	Proporciona un título a un <fieldset>.
+8. Etiquetas Semánticas
+Etiqueta	Descrición
+<header>	Define a sección de cabeceira dun documento ou sección.
+<footer>	Define o pé de páxina ou sección.
+<nav>	Define un bloque de navegación.
+<article>	Define un contido independente ou autónomo.
+<section>	Define unha sección dentro dun documento.
+<aside>	Define contido relacionado, pero independente do contido principal.
+<figure>	Define contido ilustrativo, como imaxes ou diagramas.
+<figcaption>	Proporciona un título a un <figure>.
+9. Etiquetas de Scripts
+Etiqueta	Descrición
+<script>	Define un script de programación (xeralmente JavaScript).
+<noscript>	Define contido alternativo se os scripts están desactivados.
+10. Etiquetas de Estilos
+Etiqueta	Descrición
+<style>	Define estilos CSS dentro do documento HTML.
+<meta>	Proporciona metadatos sobre o documento (por exemplo, codificación, autor).
+11. Etiquetas Menos Usadas
+Etiqueta	Descrición
+<bdi>	Aínda que non se usa moito, permite marcar un fragmento de texto que non debe ser alterado.
+<bdo>	Cambia a dirección do texto.
+<time>	Define unha data ou un rango de tempo.
+<progress>	Representa o progreso dunha tarefa.
+<meter>	Define un valor dentro dun rango predefinido.
+<dialog>	Define un diálogo ou un cadro de diálogo.
+<template>	Define contido que pode ser utilizado como plantilla.
+<slot>	Define un espazo reservado para contido que pode ser fornecido por un elemento pai.
