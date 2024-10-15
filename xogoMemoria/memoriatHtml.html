@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xogo de Memory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0f7fa;
+        }
+        /* Contedor grella 4x2 */
+        .memory-container {
+            display: grid;
+            grid-template-columns: repeat(4, 100px); /* 4 columnas de 100px cada unha */
+            grid-gap: 10px; /* Espazo entre tarxetas */
+            justify-content: center;
+        }
+        /* Estilo tarxetas: cadrados de 100x100px con cor de fondo e centrado do contido */
+        .memory-card {
+            width: 100px;
+            height: 100px;
+            background-color: #00796b; /* Cor parte traseira tarxeta */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: transparent; /* Inicialmente contido invisible */
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 8px; /* Esquinas redondeadas */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Transición para cor e contido */
+        }
+        /* Clase para voltear tarxetas que amosa o contido */
+        .memory-card.volteada {
+            background-color: #0288d1; /* Cor ao voltear */
+            color: white; /* Amosa contido ao voltear */
+        }
+        /* Clase que se aplica cando dúas tarxetas coinciden */
+        .memory-card.parella {
+            background-color: #4caf50; 
+            /* Cor verde para indicar unha parella correcta */
+            pointer-events: none; /* Desactiva clics en tarxetas correctas */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="memory-container">
+        <!-- Cada tarxeta leva un símbolo distinto que será visible ao voltear -->
+        <div class="memory-card" data-tarxeta="1">🐶</div>
+        <div class="memory-card" data-tarxeta="2">🐱</div>
+        <div class="memory-card" data-tarxeta="3">🐭</div>
+        <div class="memory-card" data-tarxeta="4">🐰</div>
+        <div class="memory-card" data-tarxeta="1">🐶</div>
+        <div class="memory-card" data-tarxeta="2">🐱</div>
+        <div class="memory-card" data-tarxeta="3">🐭</div>
+        <div class="memory-card" data-tarxeta="4">🐰</div>
+    </div>
+
+    <script>
+        // Selecciona todas as tarxetas coas que se pode interactuar
+        const tarxetas = document.querySelectorAll('.memory-card');
+        let tarxetaVolteada = false; // Indica se xa hai unha volteada
+        let primeiraTarxeta, segundaTarxeta; // Variables para gardar as dúas tarxetas seleccionadas
+        let bloquearTaboleiro = false; // Bloquea o taboleiro durante o proceso de comprobación de parellas
+
+        // Función que xestiona o clic sobre unha tarxeta
+        function voltearTarxeta() {
+            if (bloquearTaboleiro) return; // Non permitir accións se o taboleiro está bloqueado
+            if (this === primeiraTarxeta) return; // Non permitir voltear dúas veces a mesma tarxeta
+
+            this.classList.add('volteada'); // engade clase 'volteada' para cambiar a cor e amosar o contido
+
+            // Se non hai ningunha tarxeta volteada, esta é primeira
+            if (!tarxetaVolteada) {
+                tarxetaVolteada = true;
+                primeiraTarxeta = this;
+                return;
+            }
+
+            // Se xa hai unha tarxeta volteada, gardamos esta como a segunda
+            segundaTarxeta = this;
+
+            // Comprobar se as dúas tarxetas seleccionadas son unha parella
+            comprobarParellas();
+        }
+
+        // Función que compara as dúas tarxetas
+        function comprobarParellas() {
+            // Comproba se as tarxetas coinciden comparando os seus valores "data-tarxeta"
+            let eParella = primeiraTarxeta.dataset.tarxeta === segundaTarxeta.dataset.tarxeta;
+
+            // Se son unha parella, desactiva as tarxetas; se non, revirta o voltear
+            eParella ? desactivarTarxetas() : desfacerVolteo();
+        }
+
+        // Función que se activa se as tarxetas coinciden
+        function desactivarTarxetas() {
+            primeiraTarxeta.classList.add('parella');
+            segundaTarxeta.classList.add('parella');
+            resetearTaboleiro(); // Resetea as variables para permitir novas seleccións
+        }
+
+        // Se as tarxetas non coinciden, desfai o voltear despois de 1 segundo
+        function desfacerVolteo() {
+            bloquearTaboleiro = true; 
+            // Bloquea o taboleiro mentres se desfai o voltear
+            setTimeout(() => {
+                primeiraTarxeta.classList.remove('volteada');
+                segundaTarxeta.classList.remove('volteada');
+                resetearTaboleiro(); // Resetea as variables despois de desfacer
+            }, 1000);
+        }
+
+        // Función que resetea as variables despois de cada intento
+        function resetearTaboleiro() {
+            [tarxetaVolteada, bloquearTaboleiro] = [false, false]; // Resetea os estados
+            [primeiraTarxeta, segundaTarxeta] = [null, null]; // Borra as referencias das tarxetas
+        }
+
+        // Función para barallar as tarxetas
+        (function barallar() {
+            tarxetas.forEach(tarxeta => {
+                let posRandom = Math.floor(Math.random() * 8); // Xera unha orde aleatoria
+                tarxeta.style.order = posRandom; // Cambia a orde das tarxetas no DOM
+            });
+        })();
+
+        // Engade o evento de clic a todas as tarxetas para permitir o xogo
+        tarxetas.forEach(tarxeta => tarxeta.addEventListener('click', voltearTarxeta));
+    </script>
+</body>
+</html>
