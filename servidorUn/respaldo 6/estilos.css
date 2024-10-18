@@ -13,7 +13,9 @@ h3 {
     font-size: 1.5em;
     margin-bottom: 15px;
 }
-
+.contedor {
+ flex-direction: 'row';
+}
 /* Táboa */
 table {
     width: 100%;
