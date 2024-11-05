@@ -6,33 +6,28 @@ let puntuacions = JSON.parse(fs.readFileSync(__dirname + "/puntuacions.json", "u
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 let usuario;
+
 //----------------------------------MENÚS-------------------------------------------
 //*******INICIO *************/
 function menuLogin() {
   console.log("Menú login:");
   console.log("1 Iniciar sesión");
-  console.log("2 rexistrar usuario");
-  console.log("3 Saír");
+  console.log("2 Saír");
   rl.question("Elixe unha opción: ", function (opcion) {
     switch (opcion) {
       case "1":
         iniciarSesion();
         break;
       case "2":
-        rexistrarUsuario();
-        break;
-      case "3":
         rl.close();
         break;
     }
   });
 }
 
-
 //********LOGIN ***************/
 function iniciarSesion() {
   rl.question("Introduce o nome de usuario: ", function (nomeUsuario) {
-    //función dentro do rl que opera coa palabra que s elle meteu
     usuario = usuarios.find((user) => user.nome === nomeUsuario);
     if (usuario) {
       rl.question("Introduce o contrasinal: ", function (contrasinal) {
@@ -51,7 +46,6 @@ function iniciarSesion() {
   });
 }
 
-
 //************* REXISTRO **************/
 function rexistrarUsuario() {
   rl.question("Introduce o novo nome de usuario: ", function (novoUsuario) {
@@ -69,16 +63,9 @@ function rexistrarUsuario() {
   });
 }
 
-
-
 //***********MENÚ PRINCIPAL */
-
 function menuPrincipal() {
   console.log("\n--- Menú principal ---");
-
-  // console.log("tipo de usuario: ");
-  // console.log(usuario.tipo);
-
 
   console.log("1. Xogar partida");
   console.log("2. Xogar contra a máquina");
@@ -116,35 +103,22 @@ function menuPrincipal() {
 }
 
 //************FUNCIÓNS PARTIDA  */
-
 function xogarPartida(maquina) {
-  // const cartas = [1, 1, 2, 2, 3, 3];  
-
   let puntuacion = 0;
   const cartas = ['♥', '♥', '♤', '♤', '♧', '♧'];
-  let estadoCartas = new Array(6).fill(false);  
-  // crea un array de 6 booleanos para o estado das cartas (seleccionadas ou non/ comezan as 6 en false)
-  let paresEncontrados = 0; //para ver cando acaba a partida
-  //---------
+  let estadoCartas = new Array(6).fill(false);
+  let paresEncontrados = 0;
   let quendaXogador = true;
 
-  //--------ENSINA CARTAS
   function mostrarCartas() {
     console.log("*************");
-    //bucle pra ensinar as cartas
     for (let i = 0; i < 6; i++) {
       process.stdout.write(estadoCartas[i] ? `[${cartas[i]}] ` : "[X] ");
-      //process.stdout.write() función que permite escribir na consola, 
-      //non fai como o console.log que marca un salto de liña en cada un, este reproduce tal cal
-
-
-      // estadocartas[i] ---booleano que indica se a carta está seleccionada ou non, se está seleccionada vese a figura, se non o X
-      if ((i + 1) % 3 === 0) console.log("");  
-      // Formato 3x2. cada vez que amosa 3 cartas fai un salto de liña, como o for sae 6 veces amosa 6 cartas(dúas filas)
+      if ((i + 1) % 3 === 0) console.log("");
     }
     console.log("*************");
   }
-  //pra que a máquina seleccione
+
   function seleccionarAleatorio(estado) {
     let carta;
     do {
@@ -152,56 +126,47 @@ function xogarPartida(maquina) {
     } while (estado[carta]);
     return carta;
   }
-  //--------------MARCA CARTA
+
   function seleccionarCarta(callback) {
-    //márcase o callback en seleccionar carta
     if (maquina && !quendaXogador) {
       let carta1 = seleccionarAleatorio(estadoCartas);
-      estadoCartas[carta1] = true; //marca seleccionada ese número pasa a true
+      estadoCartas[carta1] = true;
       console.log(`A máquina seleccionou a carta ${carta1 + 1}`);
       let carta2;
       do {
         carta2 = seleccionarAleatorio(estadoCartas);
       } while (carta2 === carta1);
-//se a segunda non é a mesma ca primeira marca a segunda
       estadoCartas[carta2] = true;
       console.log(`A máquina seleccionou a carta ${carta2 + 1}`);
-
-      callback(carta1 + 1, carta2 + 1); //mándase o callback
+      callback(carta1 + 1, carta2 + 1);
     }
-    estadoCartas = [false, false]
     quendaXogador = true;
     if (quendaXogador || !maquina) {
       rl.question("Selecciona unha carta (1-6): ", function (carta) {
         carta = parseInt(carta);
         if (carta < 1 || carta > 6 || estadoCartas[carta - 1]) {
-          //parsea e comproba que non se sae do rango 1-6
           console.log("Carta inválida ou xa seleccionada.");
-          return seleccionarCarta(callback);  // Volver escoller
+          return seleccionarCarta(callback);
         }
-        estadoCartas[carta - 1] = true;  // Marcar carta seleccionada
-        callback(carta);//mándase outro callback
-        //o callback  é o que se executa despois de seleccionar a carta na última función onde se declarou(neste caso seleccionarcarta)
-
+        estadoCartas[carta - 1] = true;
+        callback(carta);
       });
-    } else {
-
     }
   }
-  //---- COMPROBA COINCIDENCIA
+
   function comprobarMatch(carta1, carta2) {
     if (cartas[carta1 - 1] === cartas[carta2 - 1]) {
       console.log("Coinciden!");
       paresEncontrados++;
       puntuacion += 1;
+      // As cartas coinciden e quedan permanentemente descubertas (mantemos estadoCartas como true)
     } else {
       console.log("Non coinciden.");
       puntuacion -= 0.1;
-      estadoCartas[carta1 - 1] = false;  // Desmarca a carta no array
+      estadoCartas[carta1 - 1] = false;  // Ocultar se non coinciden
       estadoCartas[carta2 - 1] = false;
-      quendaXogador = !quendaXogador;
+      quendaXogador = !quendaXogador;  // Cambiar quenda
     }
-    //volver de novo a mostrar o cadro de cartas (coas parellas xa feitas)
     mostrarCartas();
   }
 
@@ -211,11 +176,8 @@ function xogarPartida(maquina) {
       let partidaActual = { usuario: usuario.nome, puntos: puntuacion };
       if (!maquina) {
         puntuacions.push(partidaActual);
-        // gardar partida no json usuario:... - puntos:....
         fs.writeFileSync(__dirname + "/puntuacions.json", JSON.stringify(puntuacions, null, 2));
         console.log("Resultados rexistrados correctamente.");
-      } else {
-        console.log(`Puntuación final: ${puntuacion}`)
       }
       return menuPrincipal();
     } else {
@@ -229,15 +191,12 @@ function xogarPartida(maquina) {
     }
   }
 
-  // barallar
   cartas.sort(() => Math.random() - 0.5);
-  //o mathrandom dá valor entre 0 e 1, ao restar 0.5 querá un valor entre -0.5 ou +0.5.
-  //o sort ordena o array poñendo antes os negativos, logo positivos e o 0 sen cambios
   mostrarCartas();
   continuarXogo();
 }
 
-//  ****** ** **** ** *** ***** *** **HISTORIAL
+// ****** ** **** ** *** ***** *** **HISTORIAL
 function amosarHistorial() {
   console.log(`Historial de partidas de ${usuario.nome}:`);
   const historialUsuario = puntuacions.filter((p) => p.usuario === usuario.nome);
@@ -252,6 +211,5 @@ function amosarHistorial() {
 
   menuPrincipal();
 }
-
 
 menuLogin();

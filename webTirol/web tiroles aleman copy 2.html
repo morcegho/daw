@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo de Folk de Canto Tirolés</title>
+    <style>
+        
+         .video-list {
+            margin: 20px auto;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .video-item {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .video-item iframe {
+            width: 100%;
+            border-radius: 8px;
+        } 
+
+        .performances,
+        /* .calendar, */
+        .product-grid,
+        .booking-form,
+        .about {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .booking-form input,
+        .booking-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        footer h4 {
+            margin: 10px 0;
+        }
+
+   /* Cores */
+   :root {
+            --primary-color: #A8DADC;    /* Light Aqua */
+            --secondary-color: #457B9D;  /* Steel Blue */
+            --accent-color: #F1FAEE;     /* Mint */
+            --text-color: #1D3557;       /* Dark Navy */
+            --background-color: #F1FAEE; /* Light Mint */
+        }
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: url('fondoAlpes.jpg'); /* Ruta a la imagen de fondo */
+            background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+            background-position: center; /* Centra la imagen en el fondo */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+        }
+.language-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.language-selector button {
+    /* background: var(--primary-color); */
+    background: var(--accent-color);
+color: var(--text-color);
+    /* color: white; */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.language-selector button:hover {
+    transform: scale(1.05);
+}
+
+.header {
+    /* background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); */
+    background: rgba(168, 218, 220, 1); /* Color con translucidez */
+
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.logo-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    /* background: white; */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+/* nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(69, 123, 157, 0.8); 
+
+    padding: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+} */
+
+
+        /* Navegación */
+      
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+nav li {
+    margin: 0 10px;
+}
+/*  */
+.nav-logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: auto; /* Cambia a auto para mantener la proporción */
+    display: flex;
+    align-items: center;
+    background: none; /* Asegúrate de que el fondo sea transparente */
+    box-shadow: none; /* Sin sombra para el logo */
+}
+
+.nav-logo img {
+    height: 50px; /* Tamaño de la imagen */
+    width: auto; /* Mantiene la proporción */
+    box-shadow: none; /* Sin sombra */
+    transition: none; /* Sin transición */
+}
+
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+}
+
+nav a:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+nav a.active {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.carousel {
+    margin: 2rem auto;
+    max-width: 100%; /* Usa todo o ancho dispoñible */
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+
+.carousel-slide img {
+    width: auto;
+    height: 300px; /* Deixa que a altura se axuste automaticamente para manter a proporción */
+    object-fit: cover; /* Isto garante que as imaxes cubran o espazo dispoñible sen deformarse */
+    border-radius: 8px;
+    margin-right: 1%;
+    padding-right: 1%;
+}
+
+
+.carousel .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.carousel .btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.btn-left {
+    left: 10px;
+}
+
+.btn-right {
+    right: 10px;
+}
+
+
+.carousel-indicators {
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+.carousel-indicators .dot {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-indicators .dot:hover, 
+.carousel-indicators .dot.active {
+    background-color: #717171;
+}
+
+
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.booking-form {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(243,185,95,0.3);
+}
+
+footer {
+    background: var(--primary-color);
+    color: white;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+.style-guide-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.style-guide-content section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 10px;
+}
+
+.style-guide-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.style-guide-content ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.style-guide-content li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.style-guide-content li:before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
+.color-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.color-sample {
+    padding: 2rem;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.event-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.event-date {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+nav {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centra nav */
+            background: rgba(69, 123, 157, 0.8); 
+            padding: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo {
+            margin-right: auto; /* Empuxa logo esquerda */
+        }
+</style></head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo do Grupo de Folk de Canto Tirolés" width="150" height="150">
+        </div>
+        <h1> .</h1>
+        <!-- <h1>Grupo de Folk  HSHGÖSDSË de Canto Tirolés</h1> -->
+    </header>
+ <nav class="nav">
+        <div class="nav-logo">
+            <!-- <a href="#home"> -->
+                <img src="logo.png" alt="Logo do Grupo" style="height: 50px; width: 50px;">
+            <!-- </a> -->
+        </div>
+        <ul>
+            <li><a href="#multimedia">Multimedia</a></li>
+            <li><a href="#performances">Actuacións</a></li>
+            <li><a href="#shop">Tenda</a></li>
+            <li><a href="#booking">Contratación</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+        </ul>
+        <div class="language-selector">
+            <button>Galego</button>
+            <button>Alemán</button>
+        </div>
+        </nav>   
+    <!-- <nav class="nav">
+        <ul>
+            <li><a href="#home" class="active"><img src="logo.png" alt="Logo do Grupo" style="height: 30px; bottom: 0"></a></li>
+            <li><a href="#multimedia">Multimedia</a></li>
+            <li><a href="#performances">Actuacións</a></li>
+            <li><a href="#shop">Tenda</a></li>
+            <li><a href="#booking">Contratación</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+        </ul>
+        <div class="language-selector">
+            <button>Galego</button>
+            <button>Alemán</button>
+        </div>
+    </nav> -->
+    <!-- <div id="multimedia" id="carousel" class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="tiroles1.jpeg" alt="Imaxe 1">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles2.jpg" alt="Imaxe 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles3.jpeg" alt="Imaxe 3">
+            </div>
+            <div class="carousel-slide">
+                <img src="image4.jpg" alt="Imaxe 4">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles1.jpeg" alt="Imaxe 5">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles2.jpg" alt="Imaxe 6">
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="btn btn-primary" onclick="moveSlide(1)">&#10095;</button>
+    </div> -->
+ 
+    <div id="multimedia" class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="tiroles1.jpeg" alt="Imaxe 1">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles2.jpg" alt="Imaxe 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles3.jpeg" alt="Imaxe 3">
+            </div>
+            <div class="carousel-slide">
+                <img src="image4.jpg" alt="Imaxe 4">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles1.jpeg" alt="Imaxe 5">
+            </div>
+            <div class="carousel-slide">
+                <img src="tiroles2.jpg" alt="Imaxe 6">
+            </div>
+        </div>
+        <!-- Botones de navegación -->
+        <button class="btn btn-left" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="btn btn-right" onclick="moveSlide(1)">&#10095;</button>
+    
+        <div class="carousel-indicators">
+            <span class="dot" onclick="moveSlide(0)"></span>
+            <span class="dot" onclick="moveSlide(1)"></span>
+            <span class="dot" onclick="moveSlide(2)"></span>
+            <span class="dot" onclick="moveSlide(3)"></span>
+            <span class="dot" onclick="moveSlide(4)"></span>
+            <span class="dot" onclick="moveSlide(5)"></span>
+        </div>
+    </div>
+    
+    
+    
+    <div >
+        <!-- <h2>Vídeos</h2> -->
+        <div class="video-list">
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
+                <h3>Actuación en Directo - Evento 1</h3>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen></iframe>
+                <h3>Folk Tradicional - Evento 2</h3>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example3" frameborder="0" allowfullscreen></iframe>
+                <h3>Entrevista ao Grupo - Evento 3</h3>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example4" frameborder="0" allowfullscreen></iframe>
+                <h3>Actuación en Directo - Evento 4</h3>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example5" frameborder="0" allowfullscreen></iframe>
+                <h3>Folk Tradicional - Evento 5</h3>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example6" frameborder="0" allowfullscreen></iframe>
+                <h3>Entrevista ao Grupo - Evento 6</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="performances" class="performances">
+        <h2>Actuacións</h2>
+        <div class="upcoming-events">
+            <!-- <h2>Próximas Actuacións</h2> -->
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-date">15 XUÑ</div>
+                    <div class="event-details">
+                        <h3>Festival Folk de Verán</h3>
+                        <p>20:00h - Praza Maior, Santiago</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">22 XUÑ</div>
+                    <div class="event-details">
+                        <h3>Festa da Música</h3>
+                        <p>19:30h - Auditorio Municipal, Vigo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h2>Tenda</h2>
+
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="product1.jpg" alt="Produto 1" width="150" height="150">
+            <h3>Produto 1</h3>
+            <p>Descrición do produto 1.</p>
+            <button>Comprar</button>
+        </div>
+        <div class="product-card">
+            <img src="product2.jpg" alt="Produto 2" width="150" height="150">
+            <h3>Produto 2</h3>
+            <p>Descrición do produto 2.</p>
+            <button>Comprar</button>
+        </div>
+        <div class="product-card">
+            <img src="product3.jpg" alt="Produto 3" width="150" height="150">
+            <h3>Produto 3</h3>
+            <p>Descrición do produto 3.</p>
+            <button>Comprar</button>
+        </div>
+        <div class="product-card">
+            <img src="product4.jpg" alt="Produto 4" width="150" height="150">
+            <h3>Produto 4</h3>
+            <p>Descrición do produto 4.</p>
+            <button>Comprar</button>
+        </div>
+        <div class="product-card">
+            <img src="product5.jpg" alt="Produto 5" width="150" height="150">
+            <h3>Produto 5</h3>
+            <p>Descrición do produto 5.</p>
+            <button>Comprar</button>
+        </div>
+        <div class="product-card">
+            <img src="product6.jpg" alt="Produto 6" width="150" height="150">
+            <h3>Produto 6</h3>
+            <p>Descrición do produto 6.</p>
+            <button>Comprar</button>
+        </div>
+</div>
+    <div id="booking" class="booking-form">
+        <h2>Contratación</h2>
+        <form>
+            <input type="text" placeholder="Nome" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Detalles da contratación" rows="4" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div id="about" class="about">
+        <h2>Sobre Nós</h2>
+        <p>O Grupo de Folk de Canto Tirolés é unha agrupación dedicada a revivir a música e danza tradicional tirolesa.</p>
+    </div>
+
+    <footer>
+        <h4>Contacto: info@grupo-folk.com</h4>
+        <p>&copy; 2024 Grupo de Folk de Canto Tirolés. Todos os dereitos reservados.</p>
+    </footer>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+    
+        function showSlide(index) {
+            // Asegurar que o índice non saia dos límites
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+    
+            // Desprazar o carrusel
+            document.querySelector('.carousel-container').style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+            // Actualizar os indicadores
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+    
+        function moveSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+    
+        // Mostrar a primeira diapositiva cando se carga a páxina
+        showSlide(currentSlide);
+    </script>
+    
+</body>
+</html>

@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "SELECT * FROM usuarios";
     $result = mysqli_query($conectar, $sql) or die("Erro na consulta: " . mysqli_error($conectar));
 }
-
+Comprobar letra date_interval_format
 // Finalmente, pechamos a conexión á base de datos.
 mysqli_close($conectar);
 ?>

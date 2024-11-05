@@ -6,7 +6,7 @@ let puntuacions = JSON.parse(fs.readFileSync(__dirname + "/puntuacions.json", "u
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 let usuario;
-//----------------------------------MENÚS-------------------------------------------
+//----------------------------------MENÚS-----------------------------------
 //*******INICIO *************/
 function menuLogin() {
   console.log("Menú login:");

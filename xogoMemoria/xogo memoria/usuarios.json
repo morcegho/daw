@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "pepe",
+    "contrasinal": "pepe"
+  },
+  {
+    "nome": "a",
+    "contrasinal": "a",
+    "tipo": "administrador"
+  },
+  {
+    "nome": "as",
+    "contrasinal": "as",
+    "tipo": "normal"
+  },
+  {
+    "nome": "pol",
+    "contrasinal": "pol"
+  }
+]

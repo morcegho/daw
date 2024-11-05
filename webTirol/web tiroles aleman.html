@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo de Folk de Canto Tirolés</title>
+    <style>
+        /* Colores */
+        :root {
+            --primary-color: #A8DADC;    /* Light Aqua */
+            --secondary-color: #457B9D;  /* Steel Blue */
+            --accent-color: #F1FAEE;     /* Mint */
+            --text-color: #1D3557;       /* Dark Navy */
+            --background-color: #F1FAEE; /* Light Mint */
+        }
+
+        /* Estilos básicos */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Encabezado */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2% 0;
+            margin: 0;
+        }
+
+        /* Navegación */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            padding: 1.5%;
+            margin: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logo */
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container img {
+            width: 150px;
+            height: 150px;
+        }
+
+        /* Carrusel */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .carousel img {
+            max-width: 100%;
+            display: none; /* Oculta todas las imágenes inicialmente */
+        }
+
+        .carousel img.active {
+            display: block; /* Muestra solo la imagen activa */
+        }
+
+        /* Estilos de videos */
+        .video-list {
+            margin: 20px auto;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-item {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .video-item iframe {
+            width: 100%;
+            border-radius: 8px;
+        } 
+
+        /* Estilos de actuaciones */
+        .performances,
+        .product-grid,
+        .booking-form,
+        .about {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        /* Estilos de tienda */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Formulario de contratación */
+        .booking-form input,
+        .booking-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Pie de página */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo do Grupo de Folk de Canto Tirolés" width="150" height="150">
+        </div>
+        <h1>Grupo de Folk de Canto Tirolés</h1>
+        <p>Revive a música folk tirolesa con nós!</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#home" class="active">Inicio</a></li>
+            <li><a href="#multimedia">Multimedia</a></li>
+            <li><a href="#performances">Actuacións</a></li>
+            <li><a href="#shop">Tenda</a></li>
+            <li><a href="#booking">Contratación</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+        </ul>
+        <div class="language-selector">
+            <button>Galego</button>
+            <button>Alemán</button>
+        </div>
+    </nav>
+
+    <div id="home" class="carousel">
+        <img src="image1.jpg" alt="Imaxe 1" class="active">
+        <img src="image2.jpg" alt="Imaxe 2">
+        <img src="image3.jpg" alt="Imaxe 3">
+    </div>
+
+    <div id="multimedia">
+        <h2>Vídeos</h2>
+        <div class="video-list">
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
+                <h3>Actuación en Directo - Evento 1</h3>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen></iframe>
+                <h3>Folk Tradicional - Evento 2</h3>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/example3" frameborder="0" allowfullscreen></iframe>
+                <h3>Celebración Cultural - Evento 3</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="performances" class="performances">
+        <h2>Actuacións</h2>
+        <div class="upcoming-events">
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-date">15 XUÑ</div>
+                    <div class="event-details">
+                        <h3>Festival Folk de Verán</h3>
+                        <p>20:00h - Praza Maior, Santiago</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">22 XUÑ</div>
+                    <div class="event-details">
+                        <h3>Festa da Música</h3>
+                        <p>19:30h - Auditorio Municipal, Vigo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="shop" class="product-grid">
+        <h2>Tenda</h2>
+        <div class="product-card">
+            <img src="product1.jpg" alt="Producto 1" width="100%">
+            <h3>CD de Música Tirolesa</h3>
+            <p>Prezo: 10€</p>
+            <button class="btn btn-primary">Comprar</button>
+        </div>
+        <div class="product-card">
+            <img src="product2.jpg" alt="Producto 2" width="100%">
+            <h3>Camiseta do Grupo</h3>
+            <p>Prezo: 15€</p>
+            <button class="btn btn-primary">Comprar</button>
+        </div>
+        <div class="product-card">
+            <img src="product3.jpg" alt="Producto 3" width="100%">
+            <h3>Chapéu Tradicional</h3>
+            <p>Prezo: 20€</p>
+            <button class="btn btn-primary">Comprar</button>
+        </div>
+    </div>
+
+    <div id="booking" class="booking-form">
+        <h2>Solicitar Contratación</h2>
+        <form action="submit_booking.php" method="post">
+            <input type="text" name="name" placeholder="O teu Nome" required>
+            <input type="email" name="email" placeholder="O teu Correo Electrónico" required>
+            <input type="text" name="event" placeholder="Tipo de Evento" required>
+            <textarea name="message" rows="4" placeholder="Detalles do Evento" required></textarea>
+            <input type="submit" value="Enviar Solicitude">
+        </form>
+    </div>
+
+    <div id="about" class="about">
+        <h2>Sobre Nós</h2>
+        <p>O Grupo de Folk de Canto Tirolés é unha agrupación dedicada á música e danzas tradicionais dos Alpes. Con anos de experiencia e moito amor pola nosa cultura, queremos compartir a nosa paixón contigo!</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Grupo de Folk de Canto Tirolés. Todos os dereitos reservados.</p>
+        <p>Contacto: info@grupo-folk.com</p>
+    </footer>
+
+    <script>
+        // Funcionalidade para o carrusel
+        const images = document.querySelectorAll('.carousel img');
+        let currentIndex = 0;
+
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        setInterval(showNextImage, 3000); // Cambia a imaxe cada 3 segundos
+    </script>
+</body>
+</html>

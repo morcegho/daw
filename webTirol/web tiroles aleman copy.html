@@ -1,0 +1,733 @@
+<html><head><base href="http://localhost/">
+<meta charset="UTF-8">
+<title>Grupo de Folk de Canto Tirolés - Guía de Estilo</title>
+<style>
+:root {
+    --primary-color: #E63946;    /* Vibrant Red */
+    --secondary-color: #1D3557;  /* Deep Navy */
+    --accent-color: #FFD700;     /* Gold */
+    --text-color: #2C3E50;       /* Dark Blue-Gray */
+    --background-color: #F1FAEE; /* Light Mint */
+    --success-color: #2ECC71;    /* Emerald Green */
+    --error-color: #E74C3C;      /* Bright Red */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.language-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.language-selector button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.language-selector button:hover {
+    transform: scale(1.05);
+}
+
+.header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.logo-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    padding: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+.nav-logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+}
+
+nav a:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+nav a.active {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.carousel {
+    margin: 2rem auto;
+    max-width: 1200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.calendar {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-color);
+    border-radius: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.calendar-day:hover {
+    transform: scale(1.05);
+    background: var(--accent-color);
+}
+
+.calendar-day.event {
+    background: var(--primary-color);
+    color: white;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.booking-form {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(243,185,95,0.3);
+}
+.event-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+footer {
+    background: var(--primary-color);
+    color: white;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.style-guide-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.style-guide-content section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 10px;
+}
+
+.style-guide-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.style-guide-content ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.style-guide-content li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.style-guide-content li:before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
+.color-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.color-sample {
+    padding: 2rem;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.event-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+/* .event-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        } */
+.event-date {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="language-selector">
+    <button onclick="changeLanguage('gl')">Galego</button>
+    <button onclick="changeLanguage('pl')">Polski</button>
+</div>
+
+<header class="header">
+    <div class="logo-container">
+        <div class="logo-placeholder">[Logo Area]</div>
+    </div>
+    <div class="style-guide-note">
+        Guía de Estilo - Sección 2.1: O logotipo debe estar centrado, con un área de protección do 20%. 
+        O gradiente do fondo representa as montañas e a tradición.
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="#sobre-nos">Sobre Nós</a></li>
+        <li><a href="#calendario">Calendario</a></li>
+        <li><a href="#tenda">Tenda</a></li>
+        <li><a href="#contratacion">Contratación</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div id="inicio" class="section active">
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img alt="Grupo actuando en escenario, iluminación cálida" src="concert1.jpg" width="800" height="500">
+                </div>
+                <div class="carousel-slide">
+                    <img alt="Grupo en trajes tradicionales, ambiente festivo" src="concert2.jpg" width="800" height="500">
+                </div>
+                <div class="carousel-slide">
+                    <img alt="Público disfrutando del concierto, atardecer" src="concert3.jpg" width="800" height="500">
+                </div>
+            </div>
+            <button class="carousel-prev">&#10094;</button>
+            <button class="carousel-next">&#10095;</button>
+        </section>
+    </div>
+
+    <div id="sobre-nos" class="section">
+    <div class="style-guide-container">
+        <h2>Guía de Estilo - Grupo de Folk Tirolés</h2>
+        <div class="style-guide-content">
+            <section>
+                <h3>1. Identidade Visual</h3>
+                <p>A nosa web combina elementos tradicionais do folk tirolés con un deseño moderno e dinámico. 
+                   A paleta de cores escolleita representa:</p>
+                <ul>
+                    <li>Vermello Tradicional (#E63946): Representa a paixón e a energía</li>
+                    <li>Azul Mariño (#1D3557): Evoca a serenidade das augas</li>
+                    <li>Dourado (#FFD700): Simboliza a riqueza da nosa herdanza cultural</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>2. Elementos de Interface</h3>
+                <p>Os nosos compoñentes seguen estas directrices:</p>
+                <ul>
+                    <li>Bordos redondeados (border-radius) para unha aparencia suave e moderna</li>
+                    <li>Efectos hover sutís para mellorar a interactividade</li>
+                    <li>Sombras suaves para dar profundidade</li>
+                    <li>Gradientes que evocan as paisaxes alpinas</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>3. Animacións e Transicións</h3>
+                <p>Todas as animacións están deseñadas para ser:</p>
+                <ul>
+                    <li>Suaves e naturais (0.3s de duración)</li>
+                    <li>Non intrusivas</li>
+                    <li>Significativas para a experiencia do usuario</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>4. Disposición e Espazado</h3>
+                <p>O deseño segue unha grella modular con:</p>
+                <ul>
+                    <li>Marxes consistentes de 2rem</li>
+                    <li>Padding harmonioso para mellorar a lexibilidade</li>
+                    <li>Estrutura responsive que se adapta a todos os dispositivos</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Paleta de Cores</h3>
+                <div class="color-showcase">
+                    <div class="color-sample" style="background: var(--primary-color)">
+                        <span>#E63946</span>
+                        <p>Vermello Tradicional</p>
+                    </div>
+                    <div class="color-sample" style="background: var(--secondary-color)">
+                        <span>#1D3557</span>
+                        <p>Azul Mariño</p>
+                    </div>
+                    <div class="color-sample" style="background: var(--accent-color)">
+                        <span>#FFD700</span>
+                        <p>Dourado</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+        <div class="calendar">
+            <h2>Calendario de Actuacións</h2>
+            <div class="calendar-grid">
+                <!-- Calendar grid generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div id="tenda" class="section">
+        <h2>A Nosa Tenda</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="traditional-shirt.jpg" alt="Camiseta tradicional con bordados coloridos" width="200" height="200">
+                <h3>Camiseta Tradicional</h3>
+                <p>25€</p>
+                <button class="btn btn-primary" onclick="showPurchaseModal()">Mercar</button>
+            </div>
+            <div class="product-card">
+                <img src="cd-cover.jpg" alt="Portada do CD Ecos do Val" width="200" height="200">
+                <h3>CD "Ecos do Val"</h3>
+                <p>15€</p>
+                <button class="btn btn-secondary" onclick="showPurchaseModal()">Mercar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="purchaseModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Completar Compra</h2>
+        <form id="purchaseForm" class="payment-form">
+            <div class="form-group">
+                <label for="cardName">Nome no Cartón</label>
+                <input type="text" id="cardName" required>
+            </div>
+            <div class="form-group">
+                <label for="cardNumber">Número do Cartón</label>
+                <input type="text" id="cardNumber" required pattern="[0-9]{16}">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expDate">Data de Caducidade</label>
+                    <input type="text" id="expDate" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" required pattern="[0-9]{3,4}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirmar Compra</button>
+        </form>
+    </div>
+</div>
+        <div class="booking-form">
+            <h2>Contrata ao Noso Grupo</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Data do Evento</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaxe</label>
+                    <textarea id="message" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Solicitude</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="upcoming-events">
+        <h2>Próximas Actuacións</h2>
+        <div class="events-list">
+            <div class="event-item">
+                <div class="event-date">15 XUÑ</div>
+                <div class="event-details">
+                    <h3>Festival Folk de Verán</h3>
+                    <p>20:00h - Praza Maior, Santiago</p>
+                </div>
+            </div>
+            <div class="event-item">
+                <div class="event-date">22 XUÑ</div>
+                <div class="event-details">
+                    <h3>Festa da Música</h3>
+                    <p>19:30h - Auditorio Municipal, Vigo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-section">
+        <h2>Os Nosos Vídeos</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID1" title="Videoclip 1" frameborder="0" allowfullscreen></iframe>
+                <h3>Alborada do Solpor</h3>
+            </div>
+            <div class="video-card">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID2" title="Videoclip 2" frameborder="0" allowfullscreen></iframe>
+                <h3>Vals das Montañas</h3>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h3>Contacto</h3>
+            <p>info@folktiroles.gal</p>
+            <p>+34 666 777 888</p>
+        </div>
+        <div>
+            <h3>Síguenos</h3>
+            <div class="social-links">
+                <!-- Social media links would go here -->
+            </div>
+        </div>
+    </div>
+    <div class="style-guide-note">
+        Guía de Estilo - Sección 3.2: O pé de páxina debe incluír información de contacto
+        e enlaces a redes sociais, mantendo a estética moderna-tradicional.
+    </div>
+</footer>
+
+<script>
+function changeLanguage(lang) {
+    console.log(`Cambiando idioma a: ${lang}`);
+}
+
+// Navigation
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').split('/').pop();
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(targetId).classList.add('active');
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
+
+// Carousel
+const carousel = {
+    container: document.querySelector('.carousel-container'),
+    slides: document.querySelectorAll('.carousel-slide'),
+    currentSlide: 0,
+    
+    next() {
+        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+        this.update();
+    },
+    
+    prev() {
+        this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+        this.update();
+    },
+    
+    update() {
+        this.container.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+    }
+};
+
+document.querySelector('.carousel-next').addEventListener('click', () => carousel.next());
+document.querySelector('.carousel-prev').addEventListener('click', () => carousel.prev());
+
+// Booking Form
+document.getElementById('bookingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Solicitude enviada correctamente!');
+});
+
+// Calendar
+function generateCalendar() {
+    const calendar = document.querySelector('.calendar-grid');
+    const days = 31;
+    calendar.innerHTML = '';
+    
+    for(let i = 1; i <= days; i++) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day';
+        day.textContent = i;
+        if([5, 12, 19, 26].includes(i)) {
+            day.classList.add('event');
+        }
+        calendar.appendChild(day);
+    }
+}
+
+generateCalendar();
+
+function showPurchaseModal() {
+    document.getElementById('purchaseModal').style.display = 'block';
+}
+
+// Close modal when clicking X
+document.querySelector('.close').onclick = function() {
+    document.getElementById('purchaseModal').style.display = 'none';
+}
+
+// Handle purchase form submission
+document.getElementById('purchaseForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Compra realizada con éxito!');
+    document.getElementById('purchaseModal').style.display = 'none';
+});
+</script>
+
+</body>
+</html>

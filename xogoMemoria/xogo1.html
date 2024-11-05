@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xogo de Memory Mellorado</title>
+    <style>
+        /* Estilos xerais */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Caixa principal do xogo */
+        .xogoMemory {
+            width: 90%;
+            max-width: 600px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilos de cartas */
+        .carta {
+            background: linear-gradient(145deg, #e0e0e0, #ffffff);
+            
+            border-radius: 12px;
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: transparent; 
+            /* Por defecto non se ve o contido, o texto/figura */
+            transition: transform 0.4s ease, background-color 0.4s ease;
+            position: relative;
+        }
+
+        /* Efecto hover sobre a carta */
+        .carta:hover {
+            background-color: #f0f8ff;
+            transform: scale(1.05); 
+            /* Ampliación ao pasar o rato */
+        }
+        /*focus: é o elemento que está enfocado */
+
+        /* Cartas mostradas co clic */
+        .carta:active, .carta:focus {
+            color: #333; /* Mostra a figura ao facer clic */
+            background-color: #ffffff;
+        }
+      
+        /* Botón de reinicio, non fai nada, só cambia o foco (desmarcando a carta que estivese marcada) */
+        .reset-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #66a6ff;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Efecto ao pasar o rato sobre o botón */
+        .reset-btn:hover {
+            background-color: #577bb5;
+            transform: scale(1.05); 
+                        /* Ampliación a carta un pouco ao pasar o rato */
+
+            color: #000102;
+            border-width: 2px;
+            border-color: #000102;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <h1>Xogo de parellas</h1>
+
+    <div class="xogoMemory">
+        <div class="carta" tabindex="1" data-card="1">♥</div>
+        <div class="carta" tabindex="2" data-card="2">♣</div>
+        <div class="carta" tabindex="3" data-card="1">♥</div>
+        <div class="carta" tabindex="4" data-card="3">♦</div>
+        <div class="carta" tabindex="5" data-card="3">♦</div>
+        <div class="carta" tabindex="6" data-card="2">♣</div>
+    </div>
+
+    <!-- Botón de reinicio (só desmarca) -->
+    <button class="reset-btn">Reiniciar Xogo</button>
+
+</body>
+</html>

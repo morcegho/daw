@@ -92,7 +92,7 @@
     <button type="submit">Filtrar</button>
   </form> -->
 
-  <!-- Formulario para filtrar usuarios por varios campos ao mesmo tempo -->
+  <!-- Formulario para filtrar usuarios por varios campos ao mesmo tempo OS ANTERIORES SON O MESMO POR SEPARADO -->
   <h3>Filtrar por varios campos:</h3>
   <form method="POST">
     <input type="text" name="filtrar_nome" placeholder="Nome">
