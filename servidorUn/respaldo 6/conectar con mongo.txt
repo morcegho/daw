@@ -1,0 +1,204 @@
+primeiro usar o composer (instalar? )
+ 
+composer require mongodb/mongodb
+Se non usas Composer, terías que instalar a extensión de MongoDB para PHP. Dependendo do teu sistema, podes seguir as instrucións en MongoDB Docs.
+
+2. Cambios de conexión á base de datos
+En vez de usar mysqli_connect para SQL, en MongoDB conectámonos utilizando a clase MongoDB\Client.
+
+
+Exemplo de código de conexión en PHP a MongoDB Atlas:
+
+php
+Copiar código
+<?php
+require 'vendor/autoload.php'; // Carga a librería de MongoDB
+
+// Conectamos ao servidor MongoDB Atlas
+$cliente = new MongoDB\Client("mongodb+srv://<usuario>:<contrasinal>@cluster0.mongodb.net/nome_da_base?retryWrites=true&w=majority");
+
+// Seleccionamos a base de datos e a colección (parecido a unha táboa en SQL)
+$db = $cliente->nova_base;  // Aquí 'nova_base' é o nome da base de datos
+$coleccion = $db->usuarios; // Aquí 'usuarios' é o nome da colección, similar a unha táboa
+
+?>
+3. Inserir un novo documento (similar a inserir unha fila nunha táboa SQL)
+Cambia o código da función insertar() para engadir un documento á colección de MongoDB.
+
+SQL a MongoDB:
+
+En SQL, usas INSERT INTO ....
+En MongoDB, engades documentos (registros) coa función insertOne().
+php
+Copiar código
+<?php
+// Función para inserir un novo documento en MongoDB
+function insertar($coleccion) {
+    // Recollemos os datos do formulario (coma antes)
+    $dni = $_POST["dni"];
+    $nome = $_POST["nome"];
+    $primeiro_apelido = $_POST["primeiro_apelido"];
+    $segundo_apelido = $_POST["segundo_apelido"];
+    $enderezo = $_POST["enderezo"];
+    $telefono = $_POST["telefono"];
+    $nacemento = $_POST["nacemento"];
+
+    // Validamos que a data teña o formato correcto
+    if (!validarData($nacemento)) {
+        echo "Formato de data incorrecto.";
+        return false;
+    }
+
+    // Preparamos un array asociativo co documento que queremos engadir a MongoDB
+    $documento = [
+        'dni' => $dni,
+        'nome' => $nome,
+        'primeiro_apelido' => $primeiro_apelido,
+        'segundo_apelido' => $segundo_apelido,
+        'enderezo' => $enderezo,
+        'telefono' => $telefono,
+        'nacemento' => $nacemento,
+    ];
+
+    // Engadimos o documento á colección de MongoDB
+    $resultado = $coleccion->insertOne($documento);
+
+    // Verificamos se a inserción foi exitosa
+    if ($resultado->getInsertedCount() > 0) {
+        echo "Usuario insertado correctamente.";
+    } else {
+        echo "Erro ao insertar usuario.";
+    }
+}
+?>
+4. Recuperar documentos (mostrar os datos)
+En vez de usar SELECT * FROM usuarios en SQL, en MongoDB usas find() para recuperar documentos dunha colección. Aquí tes o exemplo de como mostrar os usuarios na táboa HTML.
+
+SQL a MongoDB:
+
+SELECT * FROM usuarios en SQL.
+find() en MongoDB para obter todos os documentos dunha colección.
+php
+Copiar código
+<?php
+// Consulta para obter todos os documentos da colección 'usuarios'
+$usuarios = $coleccion->find();
+
+// Iteramos a través dos resultados e amosamos cada usuario na táboa
+foreach ($usuarios as $usuario) { ?>
+    <tr>
+        <td><?php echo $usuario['dni']; ?></td>
+        <td><?php echo $usuario['nome']; ?></td>
+        <td><?php echo $usuario['primeiro_apelido']; ?></td>
+        <td><?php echo $usuario['segundo_apelido']; ?></td>
+        <td><?php echo $usuario['enderezo']; ?></td>
+        <td><?php echo $usuario['telefono']; ?></td>
+        <td><?php echo $usuario['nacemento']; ?></td>
+    </tr>
+<?php } ?>
+5. Filtrar documentos (consultas con condicións)
+En MongoDB, usas a función find() con un array de filtros para buscar documentos que coincidan con certas condicións.
+
+Por exemplo, en SQL tiñas:
+
+sql
+Copiar código
+SELECT * FROM usuarios WHERE nome LIKE '%$nome%' AND YEAR(nacemento) > '$ano' AND dni LIKE '%$letra';
+En MongoDB, sería algo así:
+
+php
+Copiar código
+<?php
+function filtrarCombinado($coleccion, $nome, $ano, $operador, $letra) {
+    // Array que conterá as condicións da consulta
+    $filtros = [];
+
+    // Engadir condición para o nome
+    if (!empty($nome)) {
+        $filtros['nome'] = ['$regex' => $nome, '$options' => 'i']; // 'i' fai que a busca non sexa sensible a maiúsculas
+    }
+
+    // Engadir condición para o ano de nacemento
+    if (!empty($ano)) {
+        $filtros['nacemento'] = [$operador => new MongoDB\BSON\UTCDateTime(strtotime($ano . '-01-01') * 1000)];
+    }
+
+    // Engadir condición para a letra do DNI
+    if (!empty($letra)) {
+        $filtros['dni'] = ['$regex' => $letra . '$']; // '$' indica que a letra está ao final do texto
+    }
+
+    // Facemos a consulta á colección con eses filtros
+    return $coleccion->find($filtros);
+}
+?>
+6. Modificar o manexo dos filtros
+O código que xestiona os filtros tamén cambia para adaptarse a MongoDB. Cando o usuario envía o formulario, os filtros aplicaranse así:
+
+php
+Copiar código
+<?php
+// Manexar os filtros
+$result = null;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome = $_POST['filtrar_nome'] ?? '';
+    $ano = $_POST['filtrar_ano'] ?? '';
+    $operador = $_POST['tipo_filtro'] === 'anterior' ? '$lt' : '$gt'; // MongoDB usa '$lt' (menor que) e '$gt' (maior que)
+    $letra = $_POST['filtrar_dni_letra'] ?? '';
+
+    // Aplicar o filtro combinado
+    $result = filtrarCombinado($coleccion, $nome, $ano, $operador, $letra);
+} else {
+    // Consulta por defecto para mostrar todos os usuarios
+    $result = $coleccion->find();
+}
+?>
+7. Pechar a conexión
+A conexión a MongoDB Atlas non se pecha explicitamente, xa que se manexa automaticamente. A conexión remata cando o script PHP termina.
+
+Resumo dos principais cambios:
+Conexión: Usamos MongoDB\Client en vez de mysqli_connect.
+Inserción: insertOne() substitúe INSERT INTO.
+Consulta de datos: find() substitúe SELECT.
+Filtros: Os operadores de consulta de MongoDB (como $lt, $gt, $regex) substitúen os operadores SQL.
+Exemplo Final de Código PHP:
+php
+Copiar código
+<?php
+require 'vendor/autoload.php'; // Carga a librería de MongoDB
+
+// Conectar a MongoDB Atlas
+$cliente = new MongoDB\Client("mongodb+srv://<usuario>:<contrasinal>@cluster0.mongodb.net/nome_da_base?retryWrites=true&w=majority");
+$db = $cliente->nova_base;  // Nome da base de datos
+$coleccion = $db->usuarios; // Nome da colección
+
+// Funcións como insertar(), filtrarCombinado(), etc.
+// Continuar como se mostra arriba...
+
+// Peche da conexión é automático en MongoDB, polo que non hai que facer nada máis
+?>
+
+
+0	T
+1	R
+2	W
+3	A
+4	G
+5	M
+6	Y
+7	F
+8	P
+9	D
+10	X
+11	B
+12	N
+13	J
+14	Z
+15	S
+16	Q
+17	V
+18	H
+19	L
+20	C
+21	K
+22	E

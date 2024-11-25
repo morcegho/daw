@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Ejercicio de selectores</title>
+<style>
+/* Estado base, antes de visitalo */
+a {
+  color: red;
+  text-decoration: none;
+}
+
+/* Hover para efecto do rato por enrib */
+a:hover {
+  color: white;
+  background-color: red;
+  text-decoration: underline; /* subliña */
+}
+
+/* Estado cando se activa (clica) */
+a:active {
+  color: orange; 
+}
+
+/* Despois de visitalo */
+a:visited {
+  color: darkgreen; 
+}
+</style>
+</head>
+<body>
+<h1>Universidad de Alicante</h1>
+
+<ul>
+  <!-- numero os href="#" porque se marcan como visitados todos os da mesma url -->
+  <li><a href="#">Presentación</a></li>
+  <li><a href="#2">Estudios</a></li>
+  <li><a href="#3">Alumnos</a></li>
+  <li><a href="#4">Deportes</a></li>
+  <li><a href="#5">Servicios</a></li>
+</ul>
+
+</body>
+</html>

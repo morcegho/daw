@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid do cadro Piet Mondrian</title>
+    <style>
+        /* para centrar o grid */
+        body {
+            display: grid;
+            place-items: center; /* serve para centrar o contedor */
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .contedor-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr); /* 8 columnas de igual tamaño */
+            grid-template-rows: repeat(12, 1fr); /* 12 filas */
+            gap: 2px; /* Espazo entre celdas */
+            width: 320px; /* Largura total do grid */
+            height: 480px; /* Altura total do grid */
+            background-color: black; /* Fondo negro para visualizar as celdas */
+        }
+
+        /* .celda {
+            background-color: white; 
+            border: 2px solid black; 
+        } */
+
+        .cadro-amarelo {
+            grid-column: 5 / span 4;
+            grid-row: 9 / span 4; 
+            background-color: yellow; 
+            border: 2px solid black; 
+        }
+        .rectangulo-branco {
+            grid-column: 1 / span 4;
+            grid-row: 11 / span 2; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+        .inicio-azul {
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 2; 
+            background-color: rgb(51, 41, 138); 
+            border: 2px solid black; 
+        }
+        .rectangulo-branco2 {
+            grid-column: 2 / span 3;
+            grid-row: 9 / span 2; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+        .rectangulo-branco3 {
+            grid-column: 2 / span 3;
+            grid-row: 9 / span 2; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+        .cadrado-branco {
+            grid-column: 2 / span 5;
+            grid-row: 5 / span 4; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+        .columna-branca {
+            grid-column: 1 / span 1;
+            grid-row: 5 / span 4; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+        .cadrado-azul {
+            grid-column: 1 / span 1; 
+            grid-row: 9 / span 2; 
+            background-color: rgb(51, 41, 138); 
+            border: 2px solid black;
+        }
+        .cadrado-branco2 {
+            grid-column: 7 / span 2; 
+            grid-row: 7 / span 2; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+        .cadrado-azul2 {
+            grid-column: 7 / span 2; 
+            grid-row: 5 / span 2; 
+            background-color: rgb(51, 41, 138); 
+            border: 2px solid black; 
+        }
+        .cadrado-branco4 {
+            grid-column: 1 / span 1; 
+            grid-row: 3 / span 2; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black;
+        }
+        .lina-vermella {
+            grid-column: 2 / span 5; 
+            grid-row: 3 / span 2; 
+            background-color: rgb(221, 18, 18); 
+            border: 2px solid black; 
+        }
+        .columna-branca2 {
+            grid-column: 7 / span 2; 
+            grid-row: 1 / span 4; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+        .horizontal-branca {
+            grid-column: 4 / span 3; 
+            grid-row: 2 / span 1; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black;
+        }
+        .horizontal-amarela {
+            grid-column: 4 / span 3; 
+            grid-row: 1 / span 1; 
+            background-color: yellow; 
+            border: 2px solid black; 
+        }
+        .cadrado-branco5 {
+            grid-column: 2 / span 2;
+            grid-row: 1 / span 2; 
+            background-color: rgb(255, 255, 255); 
+            border: 2px solid black; 
+        }
+    </style>
+</head>
+<body>
+    <div class="contedor-grid">
+        <div class="cadrado-azul"></div>
+        <div class="cadrado-branco4"></div>
+        <div class="horizontal-branca"></div>
+        <div class="horizontal-amarela"></div>
+        <div class="cadrado-branco5"></div>
+        <div class="inicio-azul"></div>
+        <div class="cadrado-branco"></div>
+        <div class="columna-branca"></div>
+        <div class="cadrado-branco2"></div>
+        <div class="cadrado-azul2"></div>
+        <div class="lina-vermella"></div>
+        <div class="columna-branca2"></div>
+        <div class="rectangulo-branco"></div>
+        <div class="rectangulo-branco2"></div>
+        <div class="cadro-amarelo"></div>
+    </div>
+</body>
+</html>

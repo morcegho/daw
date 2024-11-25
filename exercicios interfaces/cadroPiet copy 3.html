@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* Ajusta según las columnas */
+            grid-template-rows: repeat(6, 1fr);    /* Ajusta según las filas */
+            gap: 5px; /* Espaciado entre celdas */
+            width: 600px; /* Ajustar tamaño total */
+            height: 600px;
+            background-color: black;
+        }
+        .grid-item {
+            background-color: white; /* Color por defecto */
+            border: 1px solid black; /* Bordes para diferenciar las celdas */
+        }
+        .red { background-color: red; }
+        .blue { background-color: blue; }
+        .yellow { background-color: yellow; }
+        .black { background-color: black; }
+        .white { background-color: white; }
+        /* Define posiciones específicas */
+        .item1 { grid-column: 1 / span 2; grid-row: 1 / span 3; } /* Ejemplo */
+        .item2 { grid-column: 3 / span 4; grid-row: 1 / span 2; }
+        .item3 { grid-column: 1 / span 2; grid-row: 4 / span 3; }
+        .item4 { grid-column: 3 / span 4; grid-row: 3 / span 3; }
+        .item5 { grid-column: 6 / span 1; grid-row: 5 / span 2; }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item red item1"></div>
+        <div class="grid-item blue item2"></div>
+        <div class="grid-item yellow item3"></div>
+        <div class="grid-item black item4"></div>
+        <div class="grid-item white item5"></div>
+    </div>
+</body>
+</html>
+
