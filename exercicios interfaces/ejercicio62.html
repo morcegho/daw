@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Casa con tejado y pared</title>
+  <style>
+    /* Contenedor principal */
+    .casa {
+      display: flex;
+      flex-direction: column; /* Organizar elementos en columna */
+      align-items: center; /* Centrar horizontalmente */
+      margin-top: 50px; /* Separación desde el borde superior */
+    }
+
+    /* Estilo del tejado (rectángulo rojo) */
+    .tejado {
+      background-color: #7c2424; /* Color rojo oscuro */
+      width: 300px; /* Ancho del tejado */
+      height: 50px; /* Altura del tejado */
+    }
+
+    /* Estilo de la pared (cuadrado gris) */
+    .parede {
+      background-color: #7c7c7c; /* Color gris */
+      width: 300px; /* Ancho igual al tejado */
+      height: 300px; /* Altura de la pared */
+    }
+  </style>
+</head>
+<body>
+  <div class="casa">
+    <!-- Tejado -->
+    <div class="tejado"></div>
+    <!-- Pared -->
+    <div class="parede"></div>
+  </div>
+</body>
+</html>

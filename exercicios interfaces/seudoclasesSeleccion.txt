@@ -1,0 +1,96 @@
+:hover: Se aplica cuando el ratón pasa por encima de un elemento.
+css
+Copiar código
+a:hover {
+  color: blue;
+}
+:active: Se aplica cuando un elemento está siendo activado (por ejemplo, al hacer clic).
+css
+Copiar código
+a:active {
+  color: red;
+}
+:focus: Se aplica cuando un elemento recibe el foco, como cuando un campo de formulario es seleccionado.
+css
+Copiar código
+input:focus {
+  background-color: yellow;
+}
+Pseudoclases estructurales:
+:first-child: Se aplica al primer hijo de un elemento.
+css
+Copiar código
+ul > li:first-child {
+  font-weight: bold;
+}
+:last-child: Se aplica al último hijo de un elemento.
+css
+Copiar código
+ul > li:last-child {
+  color: green;
+}
+:nth-child(): Se aplica a los elementos hijos según un patrón.
+css
+Copiar código
+li:nth-child(odd) {
+  background-color: lightgray;
+}
+li:nth-child(2n) {
+  background-color: lightblue;
+}
+:nth-of-type(): Se aplica a los elementos según su tipo dentro de su contenedor.
+css
+Copiar código
+p:nth-of-type(2) {
+  color: red;
+}
+Pseudoclases de estado de los enlaces:
+:link: Se aplica a los enlaces no visitados.
+css
+Copiar código
+a:link {
+  color: blue;
+}
+:visited: Se aplica a los enlaces que ya han sido visitados.
+css
+Copiar código
+a:visited {
+  color: purple;
+}
+Pseudoclases relacionadas con los formularios:
+:checked: Se aplica a los elementos seleccionados o marcados, como las casillas de verificación o los botones de radio.
+css
+Copiar código
+input:checked {
+  background-color: lightgreen;
+}
+:disabled: Se aplica a los elementos que están deshabilitados.
+css
+Copiar código
+input:disabled {
+  opacity: 0.5;
+}
+Pseudoclases de contexto de la relación con otros elementos:
+:not(): Se aplica a los elementos que no coinciden con el selector especificado dentro de :not().
+css
+Copiar código
+p:not(.special) {
+  color: gray;
+}
+Pseudoelementos:
+Los pseudoelementos permiten seleccionar una parte específica de un elemento (como el contenido antes o después de un elemento).
+
+::before: Permite insertar contenido antes de un elemento.
+css
+Copiar código
+p::before {
+  content: "Nota: ";
+  font-weight: bold;
+}
+::after: Permite insertar contenido después de un elemento.
+css
+Copiar código
+abbr::after {
+  content: " (" attr(title) ")";
+  font-style: italic;
+}
