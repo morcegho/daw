@@ -1,0 +1,60 @@
+Detalles de como funciona cada función:
+1. Crear un usuario
+Función: crearUsuario($nome, $correo, $contrasinal)
+Descrición: Esta función recibe o nome, correo e contrasinal do usuario e crea un novo documento na colección usuarios de MongoDB.
+Acción:
+Crea un documento que inclúe o nome, correo, contrasinal (sen encriptar) e un array baleiro de puntuacións.
+Usa a función insertOne() para engadir o documento á colección.
+Nota: Se decides encriptar a contrasinal (con password_hash), terías que usar password_hash($contrasena, PASSWORD_DEFAULT) na creación do usuario.
+
+2. Ler un usuario
+Función: lerUsuario($correo)
+Descrición: Busca un usuario polo correo e mostra os seus datos (nome, correo, data de rexistro) e as puntuacións asociadas a ese usuario.
+Acción:
+Usa findOne() para buscar un documento polo correo electrónico.
+Se o usuario existe, amósanse as puntuacións en formato de lista, cada unha con a súa data.
+3. Engadir unha puntuación
+Función: engadirPuntuacion($correo, $puntuacion)
+Descrición: Esta función engade unha nova puntuación ao historial do usuario.
+Acción:
+Busca o usuario por correo.
+Crea un novo obxecto que contén a puntuación e a data da partida.
+Usa $push para engadir esta nova puntuación ao array de puntuacions do usuario.
+4. Eliminar un usuario
+Función: eliminarUsuario($correo)
+Descripión: Permite eliminar un usuario da base de datos usando o seu correo.
+Acción:
+Busca o usuario polo correo e se o atopa, elimínaa utilizando deleteOne().
+5. Validar a contrasinal
+Función: validarContrasina($correo, $contrasena)
+Descrición: Esta función serve para comprobar se a contrasinal fornecida polo usuario coincide coa almacenada na base de datos.
+Acción:
+Busca o usuario polo correo.
+Compara a contrasinal almacenada co valor recibido. Neste caso, como non estamos encriptando a contrasinal, facemos unha comparación directa.
+Estrutura do documento na base de datos:
+Un exemplo do documento dunha colección usuarios sería algo así:
+
+json
+Copiar código
+{
+    "_id": ObjectId("1234567890"),
+    "nome": "Juan Pérez",
+    "correo": "juan@example.com",
+    "contrasinal": "contrasina123",
+    "puntuacions": [
+        { "puntuacion": 1200, "data": ISODate("2024-11-30T10:15:00Z") },
+        { "puntuacion": 1300, "data": ISODate("2024-11-30T11:00:00Z") }
+    ],
+    "data_rexistro": ISODate("2024-11-30T10:00:00Z")
+}
+Campos:
+nome: Nome do usuario.
+correo: Correo electrónico do usuario (usado como identificador único).
+contrasinal: Contrasinal (non encriptada no exemplo, pero pode ser se desexas).
+puntuacions: Array que almacena as puntuacións. Cada puntuación é un obxecto con o valor e a data en que se xogou.
+data_rexistro: A data na que o usuario se rexistrou no sistema.
+
+Que máis podes mellorar ou engadir?
+Seguridade: Se usas contrasinais, é recomendable usar password_hash para almacenar contrasinais seguras.
+Índices: Se buscas usuarios polo correo con frecuencia, sería útil crear un índice en MongoDB para mellorar o rendemento.
+Validación de entradas: Asegúrate de validar os datos que se reciben das entradas do usuario para evitar datos incorrectos ou maliciosos.
